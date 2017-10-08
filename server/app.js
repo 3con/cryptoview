@@ -1,6 +1,6 @@
 const express = require('express');
 const graphqlHTTP = require('express-graphql');
-const request = require('request');
+const axios = require('axios');
 const path = require('path');
 const app = express();
 const serveStatic = require('serve-static');
@@ -17,11 +17,9 @@ if (process.env.NODE_ENV === 'production') {
 // }));
 
 app.get('/api/charts/marketprice', (req,res) => {
-  //Testing out endpoints for now. TODO: Clean up 
-  request(' https://api.blockchain.info/charts/market-price', (error, response, body) => {
-    if (error) return res.status(405).send(error);
-    res.status(200).send(body);
-  });
+  axios.get(' https://api.blockchain.info/charts/market-price')
+    .then(response => res.status(200).send(response.data))
+    .catch(error => res.status(405).send(error));
 });
 
 app.listen(4000);
