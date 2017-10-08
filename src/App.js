@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import utils from './utils/utils.js';
 import './App.css';
 import { test } from './action/test.js';
+import LineChart from './components/LineChart';
 
 const mapStateToProps = state => {
   return {
@@ -52,11 +53,7 @@ class App extends Component {
           <h2>Bitcoin Charts</h2>
           <div>helloo</div>
         </div>
-        { this.state.data.map(values => 
-              <div>
-                <div>{values.x}</div>
-              </div>
-            ) }
+        <LineChart data={this.state.data} size={[960,500]}/>
       </div>
     );
   }
